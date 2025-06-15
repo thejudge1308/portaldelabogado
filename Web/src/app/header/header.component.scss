@@ -1,0 +1,35 @@
+.navbar {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: var(--shadow-md);
+  background: var(--background-primary);
+  border-bottom: 1px solid var(--border-color);
+}
+.logo {
+  font-family: var(--font-family-primary);
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--primary-color);
+}
+.nav-link {
+  @extend .nav-link;
+}
+.contact-phone {
+  display: inline-flex;
+  align-items: center;
+  color: var(--primary-color);
+}
+@media (max-width: 960px) {
+  .contact-phone {
+    display: none;
+  }
+}
+@media (max-width: 768px) {
+  .nav-links {
+    display: none !important;
+  }
+  .logo {
+    font-size: 1.1rem;
+  }
+}
