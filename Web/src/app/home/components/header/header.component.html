@@ -1,0 +1,110 @@
+<mat-toolbar class="navbar" [class.scrolled]="isScrolled">
+  <div class="container nav-container">
+    <!-- Logo Section -->
+    <div class="logo-section">
+      <img
+        [src]="isMobileView ? 'images/logo-mobile.png' : 'images/logo.png'"
+        alt="Portal del Abogado Logo"
+        class="logo-img"
+        width="auto"
+        height="60"
+      />
+      <!--<span class="logo-text text-primary">Portal del Abogado</span>-->
+    </div>
+
+    <!-- Desktop Navigation -->
+    <nav class="nav-menu desktop-only">
+      <a
+        class="nav-link"
+        routerLink="/"
+        routerLinkActive="active"
+        [routerLinkActiveOptions]="{ exact: true }"
+      >
+        Inicio
+      </a>
+      <a class="nav-link" routerLink="/servicios" routerLinkActive="active">
+        Servicios
+      </a>
+      <a class="nav-link" routerLink="/nosotros" routerLinkActive="active">
+        Sobre Nosotros
+      </a>
+      <a class="nav-link" routerLink="/contacto" routerLinkActive="active">
+        Contacto
+      </a>
+    </nav>
+
+    <!-- Header Actions -->
+    <div class="header-actions">
+      <!-- Phone Number - Desktop Only -->
+      <!--<div class="phone-section desktop-only">
+        <mat-icon class="phone-icon">phone</mat-icon>
+        <span class="phone-number">+56983684222</span>
+      </div>-->
+
+      <!-- CTA Button -->
+      <button class="btn-primary cta-button" routerLink="/consulta">
+        Soy Abogado
+      </button>
+
+      <!-- Mobile Menu Trigger -->
+      <button
+        mat-icon-button
+        class="mobile-menu-trigger mobile-only"
+        aria-label="Menú"
+        (click)="toggleMobileMenu()"
+      >
+        <mat-icon>menu</mat-icon>
+      </button>
+    </div>
+  </div>
+  <!--Only mobile-->
+  <div
+    *ngIf="isMobileView && isMobileMenuOpen"
+    class="mobile-menu-container"
+    [class.show-menu]="isMobileMenuOpen"
+  >
+    <ng-container *ngTemplateOutlet="mobileMenuContainer"></ng-container>
+  </div>
+</mat-toolbar>
+
+<ng-template #mobileMenuContainer>
+  <div class="mobile-menus-views">
+    <a
+      class="mobile-menu-item"
+      routerLink="/"
+      routerLinkActive="active"
+      [routerLinkActiveOptions]="{ exact: true }"
+    >
+      <mat-icon>home</mat-icon>
+      Inicio
+    </a>
+    <a
+      class="mobile-menu-item"
+      routerLink="/servicios"
+      routerLinkActive="active"
+    >
+      <mat-icon>gavel</mat-icon>
+      Servicios
+    </a>
+    <a
+      class="mobile-menu-item"
+      routerLink="/nosotros"
+      routerLinkActive="active"
+    >
+      <mat-icon>info</mat-icon>
+      Sobre Nosotros
+    </a>
+    <a
+      class="mobile-menu-item"
+      routerLink="/contacto"
+      routerLinkActive="active"
+    >
+      <mat-icon>contact_mail</mat-icon>
+      Contacto
+    </a>
+    <button class="btn-primary mobile-menu-item" routerLink="/consulta">
+      <mat-icon>person</mat-icon>
+      Soy Abogado
+    </button>
+  </div>
+</ng-template>

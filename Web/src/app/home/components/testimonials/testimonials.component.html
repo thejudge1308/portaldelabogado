@@ -1,0 +1,163 @@
+<section class="testimonials-section">
+  <div class="container">
+    <div class="section-header">
+      <h2>Lo que dicen nuestros clientes</h2>
+      <p>
+        Testimonios reales de personas que han confiado en nosotros para
+        resolver sus casos legales
+      </p>
+    </div>
+
+    <div class="testimonials-carousel">
+      <!-- Navigation Buttons -->
+      <button
+        class="carousel-btn prev-btn"
+        (click)="previousTestimonial()"
+        mat-icon-button
+        [disabled]="currentIndex === 0"
+      >
+        <mat-icon>chevron_left</mat-icon>
+      </button>
+
+      <button
+        class="carousel-btn next-btn"
+        (click)="nextTestimonial()"
+        mat-icon-button
+        [disabled]="currentIndex >= testimonials.length - visibleTestimonials"
+      >
+        <mat-icon>chevron_right</mat-icon>
+      </button>
+
+      <!-- Testimonials Container -->
+      <div class="testimonials-container">
+        <div
+          class="testimonials-track"
+          [style.transform]="
+            'translateX(' + -currentIndex * (100 / visibleTestimonials) + '%)'
+          "
+        >
+          <div
+            *ngFor="let testimonial of testimonials; let i = index"
+            class="testimonial-slide"
+            [style.width.%]="100 / visibleTestimonials"
+          >
+            <mat-card class="testimonial-card">
+              <!-- Quote Icon -->
+              <div class="quote-icon">
+                <mat-icon>format_quote</mat-icon>
+              </div>
+
+              <!-- Rating Stars -->
+              <div class="rating-section">
+                <div class="stars">
+                  <mat-icon
+                    *ngFor="let star of getStarArray(testimonial.rating)"
+                    class="star filled"
+                    >star</mat-icon
+                  >
+                  <mat-icon
+                    *ngFor="let star of getEmptyStarArray(testimonial.rating)"
+                    class="star empty"
+                    >star_border</mat-icon
+                  >
+                </div>
+              </div>
+
+              <!-- Testimonial Content -->
+              <mat-card-content class="testimonial-content">
+                <p class="testimonial-text">"{{ testimonial.comment }}"</p>
+
+                <div class="case-info">
+                  <mat-icon class="case-icon">gavel</mat-icon>
+                  <span class="case-type">{{ testimonial.caseType }}</span>
+                </div>
+
+                <div class="lawyer-info">
+                  <span class="lawyer-label">Atendido por:</span>
+                  <span class="lawyer-name">{{ testimonial.lawyerName }}</span>
+                </div>
+              </mat-card-content>
+
+              <!-- Client Info -->
+              <div class="client-info">
+                <div class="client-avatar">
+                  <img
+                    [src]="testimonial.clientImage"
+                    [alt]="testimonial.clientName"
+                    loading="lazy"
+                  />
+                  <div class="verified-badge" *ngIf="testimonial.verified">
+                    <mat-icon>verified</mat-icon>
+                  </div>
+                </div>
+
+                <div class="client-details">
+                  <h4 class="client-name">{{ testimonial.clientName }}</h4>
+                  <div class="client-location">
+                    <mat-icon>location_on</mat-icon>
+                    <span>{{ testimonial.location }}</span>
+                  </div>
+                  <div class="testimonial-date">{{ testimonial.date }}</div>
+                </div>
+              </div>
+            </mat-card>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Carousel Indicators -->
+    <div class="carousel-indicators">
+      <button
+        *ngFor="let indicator of getIndicatorArray(); let i = index"
+        class="indicator-dot"
+        [class.active]="i === currentIndicatorIndex"
+        (click)="goToTestimonial(i)"
+      ></button>
+    </div>
+
+    <!-- Overall Stats -->
+    <div class="testimonials-stats">
+      <div class="stat-item">
+        <div class="stat-number">4.8</div>
+        <div class="stat-label">Calificación Promedio</div>
+        <div class="stars-small">
+          <mat-icon
+            *ngFor="let star of [1, 2, 3, 4, 5]"
+            [class]="star <= 4 ? 'star filled' : 'star empty'"
+          >
+            {{ star <= 4 ? "star" : "star_border" }}
+          </mat-icon>
+        </div>
+      </div>
+
+      <div class="stat-item">
+        <div class="stat-number">2,847</div>
+        <div class="stat-label">Reseñas Totales</div>
+      </div>
+
+      <div class="stat-item">
+        <div class="stat-number">96%</div>
+        <div class="stat-label">Casos Exitosos</div>
+      </div>
+
+      <div class="stat-item">
+        <div class="stat-number">98%</div>
+        <div class="stat-label">Recomendarían</div>
+      </div>
+    </div>
+
+    <!-- CTA Section -->
+    <div class="testimonials-cta">
+      <h3>¿Listo para ser nuestro próximo caso de éxito?</h3>
+      <p>
+        Únete a miles de clientes satisfechos que han resuelto sus casos legales
+        con nosotros
+      </p>
+      <button class="btn-primary cta-button" routerLink="/consulta">
+        <mat-icon>rocket_launch</mat-icon>
+        Iniciar Mi Consulta
+      </button>
+    </div>
+  </div>
+</section>

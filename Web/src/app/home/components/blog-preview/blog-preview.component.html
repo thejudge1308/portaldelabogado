@@ -1,0 +1,199 @@
+<section class="blog-section">
+  <div class="container">
+    <div class="section-header">
+      <h2>Recursos Legales y Blog</h2>
+      <p>
+        Mantente informado con nuestros artículos especializados y guías legales
+        actualizadas
+      </p>
+    </div>
+
+    <!-- Featured Article -->
+    <div class="featured-article" *ngIf="featuredPost">
+      <mat-card class="featured-card">
+        <div class="featured-content">
+          <div class="featured-text">
+            <div class="article-meta">
+              <mat-chip class="category-chip featured-chip">{{
+                featuredPost.category
+              }}</mat-chip>
+              <span class="featured-badge">
+                <mat-icon>star</mat-icon>
+                Destacado
+              </span>
+            </div>
+
+            <h3 class="featured-title">{{ featuredPost.title }}</h3>
+            <p class="featured-excerpt">{{ featuredPost.excerpt }}</p>
+
+            <div class="article-info">
+              <div class="author-info">
+                <img
+                  [src]="featuredPost.authorImage"
+                  [alt]="featuredPost.author"
+                  class="author-avatar"
+                  loading="lazy"
+                />
+                <div class="author-details">
+                  <span class="author-name">{{ featuredPost.author }}</span>
+                  <div class="meta-info">
+                    <span class="publish-date">{{
+                      featuredPost.publishDate
+                    }}</span>
+                    <span class="separator">•</span>
+                    <span class="read-time"
+                      >{{ featuredPost.readTime }} min lectura</span
+                    >
+                    <span class="separator">•</span>
+                    <span class="views">{{ featuredPost.views }} vistas</span>
+                  </div>
+                </div>
+              </div>
+
+              <button
+                class="btn-primary read-btn"
+                [routerLink]="['/blog', featuredPost.id]"
+              >
+                <mat-icon>article</mat-icon>
+                Leer Artículo
+              </button>
+            </div>
+          </div>
+
+          <div class="featured-image">
+            <img
+              [src]="featuredPost.imageUrl"
+              [alt]="featuredPost.title"
+              loading="lazy"
+            />
+            <div class="image-overlay"></div>
+          </div>
+        </div>
+      </mat-card>
+    </div>
+
+    <!-- Recent Articles Grid -->
+    <div class="articles-grid">
+      <h3 class="grid-title">Artículos Recientes</h3>
+
+      <div class="articles-container">
+        <mat-card
+          *ngFor="let post of recentPosts"
+          class="article-card"
+          [routerLink]="['/blog', post.id]"
+        >
+          <div class="article-image">
+            <img [src]="post.imageUrl" [alt]="post.title" loading="lazy" />
+            <div class="image-overlay">
+              <mat-chip class="category-chip">{{ post.category }}</mat-chip>
+            </div>
+          </div>
+
+          <mat-card-content class="article-content">
+            <h4 class="article-title">{{ post.title }}</h4>
+            <p class="article-excerpt">{{ post.excerpt }}</p>
+
+            <div class="article-tags" *ngIf="post.tags.length > 0">
+              <mat-chip-set>
+                <mat-chip
+                  *ngFor="let tag of post.tags.slice(0, 3)"
+                  class="tag-chip"
+                >
+                  {{ tag }}
+                </mat-chip>
+              </mat-chip-set>
+            </div>
+          </mat-card-content>
+
+          <mat-card-footer class="article-footer">
+            <div class="footer-author">
+              <img
+                [src]="post.authorImage"
+                [alt]="post.author"
+                class="footer-avatar"
+                loading="lazy"
+              />
+              <div class="footer-info">
+                <span class="footer-author-name">{{ post.author }}</span>
+                <span class="footer-date">{{ post.publishDate }}</span>
+              </div>
+            </div>
+
+            <div class="footer-meta">
+              <div class="meta-item">
+                <mat-icon>schedule</mat-icon>
+                <span>{{ post.readTime }} min</span>
+              </div>
+              <div class="meta-item">
+                <mat-icon>visibility</mat-icon>
+                <span>{{ post.views }}</span>
+              </div>
+            </div>
+          </mat-card-footer>
+        </mat-card>
+      </div>
+    </div>
+
+    <!-- Newsletter Subscription -->
+    <div class="newsletter-section">
+      <mat-card class="newsletter-card">
+        <div class="newsletter-content">
+          <div class="newsletter-info">
+            <mat-icon class="newsletter-icon">email</mat-icon>
+            <div class="newsletter-text">
+              <h3>Suscríbete a nuestro Newsletter Legal</h3>
+              <p>
+                Recibe semanalmente los últimos cambios en la legislación
+                chilena y consejos legales prácticos
+              </p>
+            </div>
+          </div>
+
+          <div class="newsletter-form">
+            <div class="form-group">
+              <input
+                type="email"
+                placeholder="Tu email aquí"
+                class="newsletter-input"
+              /><!--TODO: [(ngModel)]="newsletterEmail"-->
+              <button
+                class="btn-accent subscribe-btn"
+                (click)="subscribeNewsletter()"
+              >
+                <mat-icon>send</mat-icon>
+                Suscribirse
+              </button>
+            </div>
+            <p class="newsletter-disclaimer">
+              <mat-icon>security</mat-icon>
+              No spam. Puedes cancelar cuando quieras.
+            </p>
+          </div>
+        </div>
+      </mat-card>
+    </div>
+
+    <!-- View All Button -->
+    <div class="section-footer">
+      <button class="btn-secondary view-all-btn" routerLink="/blog">
+        <mat-icon>library_books</mat-icon>
+        Ver Todos los Artículos
+      </button>
+
+      <div class="blog-stats">
+        <div class="stat">
+          <span class="stat-number">500+</span>
+          <span class="stat-label">Artículos</span>
+        </div>
+        <div class="stat">
+          <span class="stat-number">50k+</span>
+          <span class="stat-label">Lectores</span>
+        </div>
+        <div class="stat">
+          <span class="stat-number">24h</span>
+          <span class="stat-label">Actualización</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

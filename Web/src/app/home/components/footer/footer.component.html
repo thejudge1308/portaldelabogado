@@ -1,0 +1,256 @@
+<footer class="footer">
+  <div class="footer-main">
+    <div class="container">
+      <div class="footer-content">
+        <!-- Company Info Section -->
+        <div class="footer-section company-info">
+          <div class="logo-section">
+            <img
+              src="images/logo-contrast.png"
+              alt="Portal del Abogado Logo"
+              class="footer-logo"
+            />
+            <!--<h3 class="company-name">Portal del Abogado</h3>-->
+          </div>
+
+          <p class="company-description">
+            Conectamos clientes con los mejores abogados especializados de
+            Chile. Tu solución legal está a un click de distancia.
+          </p>
+
+          <!-- <div class="company-stats">
+            <div class="stat-item">
+              <span class="stat-number">500+</span>
+              <span class="stat-label">Abogados</span>
+            </div>
+            <div class="stat-item">
+              <span class="stat-number">15k+</span>
+              <span class="stat-label">Casos</span>
+            </div>
+            <div class="stat-item">
+              <span class="stat-number">98%</span>
+              <span class="stat-label">Satisfacción</span>
+            </div>
+          </div> -->
+
+          <!-- Certifications -->
+          <!--<div class="certifications">
+            <h4>Certificaciones</h4>
+            <div class="cert-logos">
+              <img
+                src="https://picsum.photos/80/50?random=41"
+                alt="Certificación 1"
+                loading="lazy"
+              />
+              <img
+                src="https://picsum.photos/80/50?random=42"
+                alt="Certificación 2"
+                loading="lazy"
+              />
+              <img
+                src="https://picsum.photos/80/50?random=43"
+                alt="Certificación 3"
+                loading="lazy"
+              />
+            </div>
+          </div>-->
+        </div>
+
+        <!-- Quick Links Section -->
+        <div class="footer-section">
+          <h4 class="section-title">Enlaces Rápidos</h4>
+          <ul class="footer-links">
+            <li *ngFor="let link of quickLinks">
+              <a
+                [routerLink]="link.route"
+                [target]="link.external ? '_blank' : '_self'"
+                class="footer-link"
+              >
+                <mat-icon>chevron_right</mat-icon>
+                {{ link.label }}
+              </a>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Legal Services Section -->
+        <div class="footer-section">
+          <h4 class="section-title">Servicios Legales</h4>
+          <ul class="footer-links">
+            <li *ngFor="let service of legalServices">
+              <a [routerLink]="service.route" class="footer-link">
+                <mat-icon>chevron_right</mat-icon>
+                {{ service.label }}
+              </a>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Contact Info Section -->
+        <div class="footer-section contact-section">
+          <h4 class="section-title">Contacto</h4>
+
+          <div class="contact-info">
+            <div class="contact-item">
+              <mat-icon class="contact-icon">location_on</mat-icon>
+              <div class="contact-details">
+                <span class="contact-label">Oficina Principal</span>
+                <span class="contact-value">Mi casa, Talca</span>
+              </div>
+            </div>
+
+            <div class="contact-item">
+              <mat-icon class="contact-icon">phone</mat-icon>
+              <div class="contact-details">
+                <span class="contact-label">Teléfono</span>
+                <a href="tel:+56912345678" class="contact-value"
+                  >+56983684222</a
+                >
+              </div>
+            </div>
+
+            <div class="contact-item">
+              <mat-icon class="contact-icon">email</mat-icon>
+              <div class="contact-details">
+                <span class="contact-label">Email</span>
+                <a
+                  href="mailto:contacto@portaldelabogado.cl"
+                  class="contact-value"
+                >
+                  {{ "contacto@portaldelabogado.cl" }}
+                </a>
+              </div>
+            </div>
+
+            <div class="contact-item">
+              <mat-icon class="contact-icon">schedule</mat-icon>
+              <div class="contact-details">
+                <span class="contact-label">Horario</span>
+                <span class="contact-value">Lun - Vie: 9:00 - 18:00</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Emergency Contact -->
+          <div class="emergency-contact">
+            <h5>Consultas de Emergencia</h5>
+            <a href="tel:+56983684222" class="emergency-number">
+              <mat-icon>local_hospital</mat-icon>
+              +56 9 83684222
+            </a>
+            <span class="emergency-note">Disponible 24/7</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Social Media & Newsletter Section -->
+  <div class="footer-social">
+    <div class="container">
+      <div class="social-content">
+        <div class="social-info">
+          <h4>Síguenos en Redes Sociales</h4>
+          <p>Mantente al día con las últimas noticias legales</p>
+        </div>
+
+        <div class="social-links">
+          <a
+            *ngFor="let social of socialLinks"
+            [href]="social.url"
+            target="_blank"
+            class="social-link"
+            [style.background-color]="social.color"
+            [attr.aria-label]="social.platform"
+          >
+            <fa-icon [icon]="social.icon" size="2x"></fa-icon>
+          </a>
+        </div>
+
+        <!-- Newsletter Mini -->
+        <!--<div class="newsletter-mini">
+          <span>Recibe informacion</span>
+          <button class="btn-accent newsletter-btn" routerLink="/newsletter">
+            <mat-icon>email</mat-icon>
+            Suscribirse
+          </button>
+        </div>-->
+      </div>
+    </div>
+  </div>
+
+  <!-- Bottom Footer -->
+  <div class="footer-bottom">
+    <div class="container">
+      <div class="bottom-content">
+        <div class="copyright">
+          <p>
+            &copy; {{ currentYear }} Portal del Abogado. Todos los derechos
+            reservados.
+          </p>
+          <p class="legal-note">
+            Portal del Abogado es una plataforma que conecta clientes con
+            abogados independientes.
+          </p>
+        </div>
+
+        <div class="legal-links">
+          <a routerLink="/privacidad" class="legal-link"
+            >Política de Privacidad</a
+          >
+          <span class="separator">•</span>
+          <a routerLink="/terminos" class="legal-link"
+            >Términos y Condiciones</a
+          >
+          <span class="separator">•</span>
+          <a routerLink="/cookies" class="legal-link">Política de Cookies</a>
+          <span class="separator">•</span>
+          <a routerLink="/ayuda" class="legal-link">Ayuda</a>
+        </div>
+
+        <!-- Payment Methods -->
+        <!--<div class="payment-methods">
+          <span class="payment-label">Métodos de pago seguros:</span>
+          <div class="payment-icons">
+            <img
+              src="https://picsum.photos/40/25?random=44"
+              alt="Visa"
+              loading="lazy"
+            />
+            <img
+              src="https://picsum.photos/40/25?random=45"
+              alt="Mastercard"
+              loading="lazy"
+            />
+            <img
+              src="https://picsum.photos/40/25?random=46"
+              alt="WebPay"
+              loading="lazy"
+            />
+            <img
+              src="https://picsum.photos/40/25?random=47"
+              alt="Khipu"
+              loading="lazy"
+            />
+          </div>
+        </div>-->
+      </div>
+    </div>
+  </div>
+
+  <button class="whatsapp-btn" mat-fab color="accent" aria-label="Whatsapp">
+    <fa-icon [icon]="whatsappIcon" size="2x"></fa-icon>
+  </button>
+
+  <!-- Back to Top Button -->
+  <button
+    class="back-to-top"
+    [class.visible]="showBackToTop"
+    (click)="scrollToTop()"
+    mat-fab
+    color="primary"
+    aria-label="Volver arriba"
+  >
+    <mat-icon>keyboard_arrow_up</mat-icon>
+  </button>
+</footer>

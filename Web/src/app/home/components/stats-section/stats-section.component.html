@@ -1,0 +1,128 @@
+<section class="stats-section" #statsSection>
+  <div class="stats-background">
+    <img
+      src="https://picsum.photos/1200/400?random=10"
+      alt="Estadísticas"
+      class="background-image"
+    />
+    <div class="overlay"></div>
+  </div>
+
+  <div class="container">
+    <div class="section-header">
+      <h2>Nuestros Números Hablan</h2>
+      <p>Confía en nuestra experiencia y resultados comprobados</p>
+    </div>
+
+    <div class="stats-grid">
+      <div
+        *ngFor="let stat of statistics; let i = index"
+        class="stat-card"
+        [style.animation-delay.ms]="i * 200"
+      >
+        <div class="stat-icon" [style.color]="stat.color">
+          <mat-icon>{{ stat.icon }}</mat-icon>
+        </div>
+
+        <div class="stat-content">
+          <div class="stat-number">
+            <span
+              class="animated-number"
+              [attr.data-target]="stat.value"
+              [attr.data-suffix]="stat.suffix"
+            >
+              {{ animatedValues[i] || 0 }}{{ stat.suffix }}
+            </span>
+          </div>
+
+          <h3 class="stat-label">{{ stat.label }}</h3>
+          <p class="stat-description">{{ stat.description }}</p>
+        </div>
+
+        <div
+          class="stat-decoration"
+          [style.background-color]="stat.color"
+        ></div>
+      </div>
+    </div>
+
+    <!-- Trust Indicators -->
+    <div class="trust-section">
+      <h3>¿Por qué elegirnos?</h3>
+
+      <div class="trust-grid">
+        <div class="trust-item">
+          <mat-icon class="trust-icon">verified_user</mat-icon>
+          <div class="trust-content">
+            <h4>Abogados Verificados</h4>
+            <p>Todos nuestros profesionales están certificados y verificados</p>
+          </div>
+        </div>
+
+        <div class="trust-item">
+          <mat-icon class="trust-icon">security</mat-icon>
+          <div class="trust-content">
+            <h4>Confidencialidad Total</h4>
+            <p>Tu información está protegida con los más altos estándares</p>
+          </div>
+        </div>
+
+        <div class="trust-item">
+          <mat-icon class="trust-icon">support_agent</mat-icon>
+          <div class="trust-content">
+            <h4>Soporte 24/7</h4>
+            <p>Atención y seguimiento personalizado en todo momento</p>
+          </div>
+        </div>
+
+        <div class="trust-item">
+          <mat-icon class="trust-icon">payment</mat-icon>
+          <div class="trust-content">
+            <h4>Sin Costos Ocultos</h4>
+            <p>Tarifas transparentes y sin sorpresas en el proceso</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Awards Section -->
+    <div class="awards-section">
+      <h3>Reconocimientos</h3>
+
+      <div class="awards-grid">
+        <div class="award-item">
+          <img
+            src="https://picsum.photos/120/80?random=11"
+            alt="Premio 1"
+            loading="lazy"
+          />
+          <span>Mejor Plataforma Legal 2024</span>
+        </div>
+        <div class="award-item">
+          <img
+            src="https://picsum.photos/120/80?random=12"
+            alt="Premio 2"
+            loading="lazy"
+          />
+          <span>Innovación Digital</span>
+        </div>
+        <div class="award-item">
+          <img
+            src="https://picsum.photos/120/80?random=13"
+            alt="Premio 3"
+            loading="lazy"
+          />
+          <span>Excelencia en Servicio</span>
+        </div>
+        <div class="award-item">
+          <img
+            src="https://picsum.photos/120/80?random=14"
+            alt="Premio 4"
+            loading="lazy"
+          />
+          <span>Top Choice Awards</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

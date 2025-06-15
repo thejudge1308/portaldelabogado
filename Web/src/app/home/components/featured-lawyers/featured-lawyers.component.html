@@ -1,0 +1,198 @@
+<section class="featured-lawyers-section">
+  <div class="container">
+    <div class="section-header">
+      <h2>Abogados Destacados</h2>
+      <p>
+        Conoce a nuestros profesionales mejor valorados y con mayor experiencia
+      </p>
+    </div>
+
+    <!-- Carousel Container -->
+    <div class="carousel-container">
+      <button
+        class="carousel-btn prev-btn"
+        (click)="previousSlide()"
+        [disabled]="currentSlide === 0"
+        mat-icon-button
+      >
+        <mat-icon>chevron_left</mat-icon>
+      </button>
+
+      <div class="carousel-wrapper" #carouselWrapper>
+        <div
+          class="carousel-track"
+          [style.transform]="'translateX(' + -currentSlide * slideWidth + 'px)'"
+        >
+          <div
+            *ngFor="let lawyer of featuredLawyers; let i = index"
+            class="lawyer-slide"
+          >
+            <mat-card class="lawyer-card">
+              <!-- Header with Image and Basic Info -->
+              <div class="card-header">
+                <div class="lawyer-image">
+                  <img
+                    [src]="lawyer.imageUrl"
+                    [alt]="lawyer.name"
+                    loading="lazy"
+                  />
+                  <div class="verified-badge" *ngIf="lawyer.isVerified">
+                    <mat-icon>verified</mat-icon>
+                  </div>
+                </div>
+
+                <div class="lawyer-basic-info">
+                  <h3 class="lawyer-name">{{ lawyer.name }}</h3>
+                  <p class="lawyer-education">{{ lawyer.education }}</p>
+
+                  <!-- Rating -->
+                  <div class="rating-section">
+                    <div class="stars">
+                      <mat-icon
+                        *ngFor="let star of getStarArray(lawyer.rating)"
+                        class="star filled"
+                        >star</mat-icon
+                      >
+                      <mat-icon
+                        *ngFor="let star of getEmptyStarArray(lawyer.rating)"
+                        class="star empty"
+                        >star_border</mat-icon
+                      >
+                    </div>
+                    <span class="rating-text"
+                      >{{ lawyer.rating }} ({{
+                        lawyer.reviewCount
+                      }}
+                      reseñas)</span
+                    >
+                  </div>
+                </div>
+              </div>
+
+              <!-- Specialties -->
+              <div class="specialties-section">
+                <mat-chip-set>
+                  <mat-chip
+                    *ngFor="let specialty of lawyer.specialties.slice(0, 3)"
+                  >
+                    {{ specialty }}
+                  </mat-chip>
+                </mat-chip-set>
+              </div>
+
+              <!-- Key Stats -->
+              <div class="stats-section">
+                <div class="stat-item">
+                  <mat-icon>work_history</mat-icon>
+                  <div class="stat-content">
+                    <span class="stat-value"
+                      >{{ lawyer.yearsExperience }} años</span
+                    >
+                    <span class="stat-label">Experiencia</span>
+                  </div>
+                </div>
+
+                <div class="stat-item">
+                  <mat-icon>trending_up</mat-icon>
+                  <div class="stat-content">
+                    <span class="stat-value">{{ lawyer.successRate }}%</span>
+                    <span class="stat-label">Éxito</span>
+                  </div>
+                </div>
+
+                <div class="stat-item">
+                  <mat-icon>location_on</mat-icon>
+                  <div class="stat-content">
+                    <span class="stat-value">{{ lawyer.location }}</span>
+                    <span class="stat-label">Ubicación</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Description -->
+              <mat-card-content class="card-content">
+                <p class="lawyer-description">{{ lawyer.description }}</p>
+
+                <!-- Languages and Rate -->
+                <div class="additional-info">
+                  <div class="languages">
+                    <mat-icon>language</mat-icon>
+                    <span>{{ lawyer.languages.join(", ") }}</span>
+                  </div>
+                  <div class="hourly-rate">
+                    <mat-icon>attach_money</mat-icon>
+                    <span>{{ lawyer.hourlyRate }}</span>
+                  </div>
+                </div>
+
+                <!-- Achievements -->
+                <div
+                  class="achievements"
+                  *ngIf="lawyer.achievements.length > 0"
+                >
+                  <h4>Logros destacados:</h4>
+                  <ul>
+                    <li
+                      *ngFor="
+                        let achievement of lawyer.achievements.slice(0, 2)
+                      "
+                    >
+                      <mat-icon class="achievement-icon">emoji_events</mat-icon>
+                      <span>{{ achievement }}</span>
+                    </li>
+                  </ul>
+                </div>
+              </mat-card-content>
+
+              <!-- Actions -->
+              <mat-card-actions class="card-actions">
+                <button
+                  class="btn-secondary"
+                  [routerLink]="['/abogados', lawyer.id]"
+                >
+                  <mat-icon>person</mat-icon>
+                  Ver Perfil
+                </button>
+                <button
+                  class="btn-primary"
+                  [routerLink]="['/consulta']"
+                  [queryParams]="{ abogado: lawyer.id }"
+                >
+                  <mat-icon>chat</mat-icon>
+                  Contactar
+                </button>
+              </mat-card-actions>
+            </mat-card>
+          </div>
+        </div>
+      </div>
+
+      <button
+        class="carousel-btn next-btn"
+        (click)="nextSlide()"
+        [disabled]="currentSlide >= maxSlides"
+        mat-icon-button
+      >
+        <mat-icon>chevron_right</mat-icon>
+      </button>
+    </div>
+
+    <!-- Carousel Indicators -->
+    <div class="carousel-indicators">
+      <button
+        *ngFor="let dot of getIndicatorArray(); let i = index"
+        class="indicator-dot"
+        [class.active]="i === currentSlide"
+        (click)="goToSlide(i)"
+      ></button>
+    </div>
+
+    <!-- View All Button -->
+    <div class="section-footer">
+      <button class="btn-accent view-all-btn" routerLink="/abogados">
+        <mat-icon>people</mat-icon>
+        Ver Todos los Abogados
+      </button>
+    </div>
+  </div>
+</section>
