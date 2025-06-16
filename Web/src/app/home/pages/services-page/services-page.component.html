@@ -1,1 +1,196 @@
-<p>services-page works!</p>
+<div class="services-container">
+  <!-- Banner Superior para Abogados -->
+  <div class="lawyer-demo-banner">
+    <div class="banner-content">
+      <div class="banner-info">
+        <h3 class="banner-title">
+          <mat-icon>gavel</mat-icon>
+          ¿Eres Abogado?
+        </h3>
+        <p class="banner-description">
+          Descubre cómo nuestra plataforma puede transformar tu práctica legal.
+          Herramientas profesionales, automatización inteligente y más clientes.
+        </p>
+      </div>
+      <div class="banner-actions">
+        <button mat-raised-button color="accent" class="demo-button">
+          <mat-icon>play_circle_outline</mat-icon>
+          Ver Demo
+        </button>
+        <button mat-stroked-button color="primary" class="register-button">
+          <mat-icon>person_add</mat-icon>
+          Registrarse
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Sección Principal de Servicios -->
+  <div class="services-main">
+    <div class="section-header">
+      <h2 class="section-title">Nuestros Servicios</h2>
+      <p class="section-subtitle">
+        Conectamos el mundo legal con tecnología de vanguardia
+      </p>
+    </div>
+
+    <!-- Toggle de Categorías -->
+    <div class="category-toggle">
+      <button
+        mat-button
+        [class.active]="activeCategory === 'clients'"
+        (click)="setActiveCategory('clients')"
+        class="toggle-button"
+      >
+        <div class="toggle-button-content">
+          <mat-icon>person</mat-icon>
+          Para Clientes
+          <mat-chip-set>
+            <mat-chip>{{ clientServices.length }}</mat-chip>
+          </mat-chip-set>
+        </div>
+      </button>
+      <button
+        mat-button
+        [class.active]="activeCategory === 'lawyers'"
+        (click)="setActiveCategory('lawyers')"
+        class="toggle-button"
+      >
+        <div class="toggle-button-content">
+          <mat-icon>gavel</mat-icon>
+          Para Abogados
+          <mat-chip-set>
+            <mat-chip>{{ lawyerServices.length }}</mat-chip>
+          </mat-chip-set>
+        </div>
+      </button>
+    </div>
+
+    <!-- Grid de Servicios -->
+    <div class="services-grid">
+      <!-- Servicios para Clientes -->
+      <div class="services-category" *ngIf="activeCategory === 'clients'">
+        <div class="category-intro">
+          <mat-icon class="category-icon">account_circle</mat-icon>
+          <h3>Servicios para Clientes</h3>
+          <p>
+            Encuentra el abogado perfecto y gestiona tu caso de manera eficiente
+          </p>
+        </div>
+
+        <div class="services-cards">
+          <mat-card
+            *ngFor="let service of clientServices"
+            class="service-card"
+            matRipple
+          >
+            <mat-card-header>
+              <div mat-card-avatar class="service-avatar">
+                <mat-icon>{{ service.icon }}</mat-icon>
+              </div>
+              <mat-card-title>{{ service.title }}</mat-card-title>
+              <mat-card-subtitle>
+                <mat-chip [class]="service.status">{{
+                  service.statusText
+                }}</mat-chip>
+              </mat-card-subtitle>
+            </mat-card-header>
+
+            <mat-card-content>
+              <p>{{ service.description }}</p>
+              <div class="service-features">
+                <span
+                  *ngFor="let feature of service.features"
+                  class="feature-tag"
+                >
+                  {{ feature }}
+                </span>
+              </div>
+            </mat-card-content>
+
+            <mat-card-actions align="end">
+              <button mat-button color="primary">
+                <mat-icon>arrow_forward</mat-icon>
+                Saber más
+              </button>
+            </mat-card-actions>
+          </mat-card>
+        </div>
+      </div>
+
+      <!-- Servicios para Abogados -->
+      <div class="services-category" *ngIf="activeCategory === 'lawyers'">
+        <div class="category-intro">
+          <mat-icon class="category-icon">business_center</mat-icon>
+          <h3>Servicios para Abogados</h3>
+          <p>Herramientas profesionales para modernizar tu práctica legal</p>
+        </div>
+
+        <div class="services-cards">
+          <mat-card
+            *ngFor="let service of lawyerServices"
+            class="service-card"
+            matRipple
+          >
+            <mat-card-header>
+              <div mat-card-avatar class="service-avatar lawyer-avatar">
+                <mat-icon>{{ service.icon }}</mat-icon>
+              </div>
+              <mat-card-title>{{ service.title }}</mat-card-title>
+              <mat-card-subtitle>
+                <mat-chip [class]="service.status">{{
+                  service.statusText
+                }}</mat-chip>
+              </mat-card-subtitle>
+            </mat-card-header>
+
+            <mat-card-content>
+              <p>{{ service.description }}</p>
+              <div class="service-features">
+                <span
+                  *ngFor="let feature of service.features"
+                  class="feature-tag"
+                >
+                  {{ feature }}
+                </span>
+              </div>
+            </mat-card-content>
+
+            <mat-card-actions align="end">
+              <button mat-button color="primary">
+                <mat-icon>arrow_forward</mat-icon>
+                Saber más
+              </button>
+            </mat-card-actions>
+          </mat-card>
+        </div>
+
+        <!-- CTA especial para abogados -->
+        <div class="lawyer-special-cta">
+          <mat-card class="cta-card">
+            <mat-card-content>
+              <div class="cta-content">
+                <mat-icon class="cta-icon">stars</mat-icon>
+                <h4>¿Listo para impulsar tu carrera legal?</h4>
+                <p>
+                  Únete a más de 1,000 abogados que ya confían en nuestra
+                  plataforma
+                </p>
+                <div class="cta-actions">
+                  <button mat-raised-button color="accent" class="cta-primary">
+                    <mat-icon>rocket_launch</mat-icon>
+                    Comenzar Ahora
+                  </button>
+                  <button mat-stroked-button color="primary">
+                    <mat-icon>schedule</mat-icon>
+                    Agendar Demo
+                  </button>
+                </div>
+              </div>
+            </mat-card-content>
+          </mat-card>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
