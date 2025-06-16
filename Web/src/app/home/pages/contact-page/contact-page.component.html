@@ -1,1 +1,252 @@
-<p>contact-page works!</p>
+<div class="contact-container">
+  <!-- Banner Dinámico de Beneficios -->
+  <div class="benefits-banner">
+    <div class="banner-background"></div>
+
+    <div class="banner-content">
+      <div class="benefits-showcase">
+        <div
+          class="benefit-item"
+          *ngFor="let benefit of lawyerBenefits; let i = index"
+          [class.active]="i === currentBenefitIndex"
+        >
+          <mat-icon class="benefit-icon">{{ benefit.icon }}</mat-icon>
+          <h3 class="benefit-title">{{ benefit.title }}</h3>
+          <p class="benefit-description">{{ benefit.description }}</p>
+        </div>
+      </div>
+
+      <div class="banner-cta">
+        <h2 class="main-title">¿Listo para transformar tu práctica legal?</h2>
+        <p class="main-subtitle">
+          Únete a la comunidad de abogados más innovadora de Chile
+        </p>
+        <div class="stats-row">
+          <div class="stat-item" *ngFor="let stat of stats">
+            <span class="stat-number">{{ stat.number }}</span>
+            <span class="stat-label">{{ stat.label }}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Sección de Contacto -->
+  <div class="contact-section">
+    <div class="contact-header">
+      <h2 class="section-title">Contáctanos</h2>
+      <p class="section-subtitle">
+        Estamos aquí para ayudarte. Cuéntanos cómo podemos asistirte.
+      </p>
+    </div>
+
+    <div class="contact-content">
+      <!-- Información de Contacto -->
+      <div class="contact-info">
+        <mat-card class="info-card">
+          <mat-card-content>
+            <div class="contact-methods">
+              <div class="contact-method" *ngFor="let method of contactMethods">
+                <div class="method-icon">
+                  <mat-icon>{{ method.icon }}</mat-icon>
+                </div>
+                <div class="method-content">
+                  <h4>{{ method.title }}</h4>
+                  <p>{{ method.description }}</p>
+                  <span class="method-value">{{ method.value }}</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="office-hours">
+              <mat-icon>schedule</mat-icon>
+              <div>
+                <h4>Horarios de Atención</h4>
+                <p>Lunes a Viernes: 9:00 - 18:00</p>
+                <p>Sábados: 9:00 - 13:00</p>
+              </div>
+            </div>
+          </mat-card-content>
+        </mat-card>
+      </div>
+
+      <!-- Formulario de Contacto -->
+      <div class="contact-form">
+        <mat-card class="form-card">
+          <mat-card-header>
+            <mat-card-title>Envíanos un mensaje</mat-card-title>
+            <mat-card-subtitle>
+              Completa el formulario y te responderemos a la brevedad
+            </mat-card-subtitle>
+          </mat-card-header>
+
+          <mat-card-content>
+            <form
+              [formGroup]="contactForm"
+              (ngSubmit)="onSubmit()"
+              class="contact-form-fields"
+            >
+              <!-- Tipo de Usuario -->
+              <div class="user-type-section">
+                <h4>Soy:</h4>
+                <mat-radio-group
+                  formControlName="userType"
+                  class="user-type-group"
+                >
+                  <mat-radio-button value="client" class="user-type-option">
+                    <div class="radio-content">
+                      <mat-icon>person</mat-icon>
+                      <span>Cliente</span>
+                    </div>
+                  </mat-radio-button>
+                  <mat-radio-button value="lawyer" class="user-type-option">
+                    <div class="radio-content">
+                      <mat-icon>gavel</mat-icon>
+                      <span>Abogado</span>
+                    </div>
+                  </mat-radio-button>
+                </mat-radio-group>
+              </div>
+
+              <!-- Información Personal -->
+              <div class="form-row">
+                <mat-form-field appearance="outline" class="half-width">
+                  <mat-label>Nombre</mat-label>
+                  <input
+                    matInput
+                    formControlName="firstName"
+                    placeholder="Tu nombre"
+                  />
+                  <mat-icon matSuffix>person</mat-icon>
+                  <mat-error
+                    *ngIf="contactForm.get('firstName')?.hasError('required')"
+                  >
+                    El nombre es requerido
+                  </mat-error>
+                </mat-form-field>
+
+                <mat-form-field appearance="outline" class="half-width">
+                  <mat-label>Apellido</mat-label>
+                  <input
+                    matInput
+                    formControlName="lastName"
+                    placeholder="Tu apellido"
+                  />
+                  <mat-error
+                    *ngIf="contactForm.get('lastName')?.hasError('required')"
+                  >
+                    El apellido es requerido
+                  </mat-error>
+                </mat-form-field>
+              </div>
+
+              <div class="form-row">
+                <mat-form-field appearance="outline" class="half-width">
+                  <mat-label>Correo Electrónico</mat-label>
+                  <input
+                    matInput
+                    type="email"
+                    formControlName="email"
+                    placeholder="tu@email.com"
+                  />
+                  <mat-icon matSuffix>email</mat-icon>
+                  <mat-error
+                    *ngIf="contactForm.get('email')?.hasError('required')"
+                  >
+                    El correo es requerido
+                  </mat-error>
+                  <mat-error
+                    *ngIf="contactForm.get('email')?.hasError('email')"
+                  >
+                    Ingresa un correo válido
+                  </mat-error>
+                </mat-form-field>
+
+                <mat-form-field appearance="outline" class="half-width">
+                  <mat-label>Teléfono</mat-label>
+                  <input
+                    matInput
+                    formControlName="phone"
+                    placeholder="+56 9 1234 5678"
+                  />
+                  <mat-icon matSuffix>phone</mat-icon>
+                  <mat-error
+                    *ngIf="contactForm.get('phone')?.hasError('required')"
+                  >
+                    El teléfono es requerido
+                  </mat-error>
+                </mat-form-field>
+              </div>
+
+              <!-- Motivo del Contacto -->
+              <mat-form-field appearance="outline" class="full-width">
+                <mat-label>Motivo del contacto</mat-label>
+                <mat-select formControlName="reason">
+                  <mat-option
+                    *ngFor="let reason of contactReasons"
+                    [value]="reason.value"
+                  >
+                    <mat-icon>{{ reason.icon }}</mat-icon>
+                    {{ reason.label }}
+                  </mat-option>
+                </mat-select>
+                <mat-error
+                  *ngIf="contactForm.get('reason')?.hasError('required')"
+                >
+                  Selecciona un motivo
+                </mat-error>
+              </mat-form-field>
+
+              <!-- Mensaje -->
+              <mat-form-field appearance="outline" class="full-width">
+                <mat-label>Mensaje</mat-label>
+                <textarea
+                  matInput
+                  formControlName="message"
+                  rows="4"
+                  maxlength="200"
+                  placeholder="Cuéntanos más detalles sobre tu consulta..."
+                >
+                </textarea>
+                <mat-hint align="end">
+                  {{ contactForm.get("message")?.value?.length || 0 }}/200
+                  caracteres
+                </mat-hint>
+                <mat-error
+                  *ngIf="contactForm.get('message')?.hasError('required')"
+                >
+                  El mensaje es requerido
+                </mat-error>
+              </mat-form-field>
+
+              <!-- Botones de Acción -->
+              <div class="form-actions">
+                <button
+                  mat-raised-button
+                  color="primary"
+                  type="submit"
+                  [disabled]="contactForm.invalid || isSubmitting"
+                  class="submit-button"
+                >
+                  <mat-spinner *ngIf="isSubmitting" diameter="20"></mat-spinner>
+                  <mat-icon *ngIf="!isSubmitting">send</mat-icon>
+                  {{ isSubmitting ? "Enviando..." : "Enviar Mensaje" }}
+                </button>
+
+                <button
+                  mat-button
+                  type="button"
+                  (click)="resetForm()"
+                  [disabled]="isSubmitting"
+                >
+                  <mat-icon>refresh</mat-icon>
+                  Limpiar
+                </button>
+              </div>
+            </form>
+          </mat-card-content>
+        </mat-card>
+      </div>
+    </div>
+  </div>
+</div>

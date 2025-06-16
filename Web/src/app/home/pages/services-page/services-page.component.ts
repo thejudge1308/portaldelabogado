@@ -46,7 +46,7 @@ export class ServicesPageComponent {
       statusText: 'Disponible',
       features: [
         'Dashboard personalizado',
-        'Notificaciones push',
+        'Notificaciones',
         'Historial completo',
       ],
     },
@@ -69,7 +69,7 @@ export class ServicesPageComponent {
         'Comunicación cifrada y confidencial con tu abogado desde cualquier dispositivo.',
       icon: 'chat_bubble_outline',
       status: 'coming-soon',
-      statusText: 'Disponible',
+      statusText: 'Próximamente',
       features: ['Cifrado E2E', 'Archivos adjuntos', 'Videollamadas'],
     },
     /*{
@@ -115,8 +115,8 @@ export class ServicesPageComponent {
       description:
         'Herramientas de IA para redacción, revisión y análisis de documentos legales.',
       icon: 'auto_awesome',
-      status: 'available',
-      statusText: 'Disponible',
+      status: 'coming-soon',
+      statusText: 'Próximamente',
       features: [
         'Redacción asistida',
         'Análisis de contratos',
