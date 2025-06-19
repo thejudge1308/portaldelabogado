@@ -43,40 +43,46 @@ export class ContactPageComponent implements OnInit, OnDestroy {
   // Datos dinámicos
   lawyerBenefits = [
     {
+      icon: 'business_center',
+      title: 'Automatiza tu trabajo',
+      description:
+        'Pronto podrás automatizar tareas repetitivas y enfocarte en lo que realmente importa',
+    },
+    /*{
       icon: 'trending_up',
       title: 'Incrementa tus ingresos hasta 40%',
       description:
         'Accede a más clientes y optimiza tu tiempo con herramientas inteligentes',
-    },
-    {
+    },*/
+    /*{
       icon: 'schedule',
       title: 'Ahorra 15 horas semanales',
       description:
         'Automatiza tareas administrativas y enfócate en lo que realmente importa',
-    },
+    },*/
     {
       icon: 'psychology',
       title: 'IA que potencia tu trabajo',
       description:
         'Asistente legal inteligente para redacción y análisis de documentos',
     },
-    {
+    /*{
       icon: 'people',
       title: 'Red de más de 1,000 abogados',
       description:
         'Conecta con colegas, comparte experiencias y crece profesionalmente',
-    },
+    },*/
     {
       icon: 'verified',
-      title: 'Certificación de calidad',
+      title: 'Abogados verificados por el Poder Judicial',
       description:
-        'Aumenta tu credibilidad con nuestro sello de abogado verificado',
+        'Aumenta tu credibilidad con nuestro sello de abogado verificado por el Poder Judicial',
     },
   ];
 
   stats = [
-    { number: '1,000+', label: 'Abogados activos' },
-    { number: '5,000+', label: 'Casos exitosos' },
+    { number: '13', label: 'Abogados activos' },
+    { number: '4', label: 'Casos exitosos' },
     { number: '98%', label: 'Satisfacción' },
   ];
 

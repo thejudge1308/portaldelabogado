@@ -80,7 +80,7 @@ interface LegalSpecialty {
             </mat-card-content>
 
             <mat-card-actions class="card-actions">
-              <button
+              <!--<button
                 class="btn-secondary"
                 [routerLink]="['/especialidades', specialty.id]"
               >
@@ -92,7 +92,7 @@ interface LegalSpecialty {
                 [queryParams]="{ especialidad: specialty.id }"
               >
                 Consulta Gratis
-              </button>
+              </button>-->
             </mat-card-actions>
           </mat-card>
         </div>
@@ -356,7 +356,7 @@ export class LegalSpecialtiesComponent {
         'Daños y perjuicios',
         'Propiedad inmobiliaria',
       ],
-      lawyerCount: 85,
+      lawyerCount: 8,
     },
     {
       id: 'penal',
@@ -371,7 +371,7 @@ export class LegalSpecialtiesComponent {
         'Violencia intrafamiliar',
         'Drogas y narcotráfico',
       ],
-      lawyerCount: 72,
+      lawyerCount: 5,
     },
     {
       id: 'laboral',
@@ -386,7 +386,7 @@ export class LegalSpecialtiesComponent {
         'Accidentes del trabajo',
         'Negociación colectiva',
       ],
-      lawyerCount: 63,
+      lawyerCount: 5,
     },
     {
       id: 'familiar',
@@ -401,7 +401,7 @@ export class LegalSpecialtiesComponent {
         'Tuición de menores',
         'Adopciones',
       ],
-      lawyerCount: 91,
+      lawyerCount: 8,
     },
     {
       id: 'corporativo',
@@ -416,7 +416,7 @@ export class LegalSpecialtiesComponent {
         'Compliance empresarial',
         'Contratos comerciales',
       ],
-      lawyerCount: 47,
+      lawyerCount: 2,
     },
     {
       id: 'inmobiliario',
@@ -431,7 +431,7 @@ export class LegalSpecialtiesComponent {
         'Arrendamientos',
         'Derecho de construcción',
       ],
-      lawyerCount: 54,
+      lawyerCount: 3,
     },
   ];
 

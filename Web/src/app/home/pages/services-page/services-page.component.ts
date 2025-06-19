@@ -33,8 +33,8 @@ export class ServicesPageComponent {
       description:
         'Encuentra abogados especializados usando filtros avanzados y algoritmos de matching.',
       icon: 'search',
-      status: 'available',
-      statusText: 'Disponible',
+      status: 'coming-soon',
+      statusText: 'Próximamente',
       features: ['Filtros avanzados', 'Geolocalización', 'Recomendaciones IA'],
     },
     {
@@ -42,8 +42,8 @@ export class ServicesPageComponent {
       description:
         'Monitorea el progreso de tu caso con actualizaciones automáticas y notificaciones.',
       icon: 'track_changes',
-      status: 'available',
-      statusText: 'Disponible',
+      status: 'coming-soon',
+      statusText: 'Próximamente',
       features: [
         'Dashboard personalizado',
         'Notificaciones',
@@ -60,7 +60,7 @@ export class ServicesPageComponent {
       features: [
         'Respuestas 24/7',
         'Base legal actualizada',
-        'Consultas ilimitadas',
+        'Consultas ilimitadas para derivar a un abogado.',
       ],
     },
     {
@@ -77,8 +77,8 @@ export class ServicesPageComponent {
       description:
         'Compara honorarios y servicios de múltiples abogados para tomar la mejor decisión.',
       icon: 'compare_arrows',
-      status: 'available',
-      statusText: 'Disponible',
+      status: 'coming-soon',
+      statusText: 'Próximamente',
       features: [
         'Transparencia total',
         'Sin comisiones ocultas',
@@ -90,8 +90,8 @@ export class ServicesPageComponent {
       description:
         'Acceso a plantillas y documentos legales personalizables para casos comunes.',
       icon: 'description',
-      status: 'available',
-      statusText: 'Disponible',
+      status: 'coming-soon',
+      statusText: 'Próximamente',
       features: [
         'Plantillas validadas',
         'Personalización fácil',
@@ -106,8 +106,8 @@ export class ServicesPageComponent {
       description:
         'Convierte documentos físicos a digital con OCR avanzado y categorización automática.',
       icon: 'scanner',
-      status: 'available',
-      statusText: 'Disponible',
+      status: 'coming-soon',
+      statusText: 'Próximamente',
       features: ['OCR preciso', 'Búsqueda en texto', 'Organización automática'],
     },
     {
@@ -128,8 +128,8 @@ export class ServicesPageComponent {
       description:
         'Sistema de citas con sincronización automática y recordatorios personalizados.',
       icon: 'schedule',
-      status: 'available',
-      statusText: 'Disponible',
+      status: 'coming-soon',
+      statusText: 'Próximamente',
       features: [
         'Reservas 24/7',
         'Sincronización calendar',
@@ -141,8 +141,8 @@ export class ServicesPageComponent {
       description:
         'Crea tu presencia online con plantillas especializadas para abogados.',
       icon: 'web',
-      status: 'available',
-      statusText: 'Disponible',
+      status: 'coming-soon',
+      statusText: 'Próximamente',
       features: ['Diseño responsive', 'SEO optimizado', 'Actualización fácil'],
     },
     {
@@ -150,8 +150,8 @@ export class ServicesPageComponent {
       description:
         'Gestiona clientes, casos y cotizaciones desde un panel centralizado y profesional.',
       icon: 'business_center',
-      status: 'available',
-      statusText: 'Disponible',
+      status: 'coming-soon',
+      statusText: 'Próximamente',
       features: ['Panel unificado', 'Automatización', 'Reportes detallados'],
     },
     {

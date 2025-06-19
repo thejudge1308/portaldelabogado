@@ -122,7 +122,7 @@ interface ProcessStep {
         </div>
 
         <!-- Call to Action -->
-        <div class="cta-section">
+        <!--<div class="cta-section">
           <div class="cta-content">
             <h3>¿Listo para comenzar?</h3>
             <p>
@@ -156,7 +156,7 @@ interface ProcessStep {
               <span class="stat-label">Abogados verificados</span>
             </div>
           </div>
-        </div>
+        </div>-->
       </div>
     </section>
   `,
