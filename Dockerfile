@@ -14,7 +14,7 @@ WORKDIR /app/Web
 COPY Web/package*.json ./
 
 # Install dependencies
-RUN npm ci
+RUN npm i
 # Copy Angular source code
 COPY Web/ ./
 
