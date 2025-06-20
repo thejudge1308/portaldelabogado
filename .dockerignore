@@ -1,0 +1,76 @@
+# ====================
+# Archivos y directorios a ignorar en Docker build
+# ====================
+
+# Git
+.git
+.gitignore
+.gitattributes
+
+# Node.js (Web/)
+Web/node_modules
+Web/.angular
+Web/dist
+Web/coverage
+Web/.nyc_output
+Web/.vscode
+
+# Go (Api/)
+Api/tmp
+Api/*.log
+Api/portal-api
+
+# Docker
+Dockerfile
+docker-compose*.yml
+.dockerignore
+
+# Desarrollo
+.env
+.env.local
+.env.development
+.env.test
+*.log
+logs/
+
+# IDE
+.vscode/
+.idea/
+*.iml
+*.swp
+*.swo
+
+# OS
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Documentación de desarrollo
+README.md
+docs/
+*.md
+
+# Scripts de desarrollo
+deploy.sh
+dev.sh
+
+# Backup files
+*.backup
+*.sql
+backup_*
+
+# SSL certificates (se montan como volumen)
+ssl/
+certificates/
+
+# Nginx config (se monta como volumen)
+nginx.conf
+
+# Archivos temporales
+tmp/
+temp/
+.tmp/
