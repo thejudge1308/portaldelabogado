@@ -1,0 +1,40 @@
+version: '3.8'
+
+services:
+  # Solo servicios auxiliares para desarrollo
+  postgres:
+    image: postgres:15-alpine
+    container_name: portal-postgres-dev
+    environment:
+      POSTGRES_DB: portal_abogados_dev
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+    volumes:
+      - postgres_dev_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    restart: unless-stopped
+
+  redis:
+    image: redis:7-alpine
+    container_name: portal-redis-dev
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_dev_data:/data
+    restart: unless-stopped
+
+  # Adminer para gestión de base de datos
+  adminer:
+    image: adminer
+    container_name: portal-adminer
+    ports:
+      - "8081:8080"
+    environment:
+      ADMINER_DEFAULT_SERVER: postgres
+    depends_on:
+      - postgres
+
+volumes:
+  postgres_dev_data:
+  redis_dev_data:

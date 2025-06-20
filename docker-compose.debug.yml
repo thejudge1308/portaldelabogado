@@ -1,0 +1,14 @@
+version: '3.8'
+
+services:
+  portal-debug:
+    build:
+      context: .
+      dockerfile: Dockerfile.debug
+    container_name: portal-debug
+    ports:
+      - "8080:8080"
+    environment:
+      - PORT=8080
+      - MODE=development
+      - STATIC_DIR=./portaldelabogado

@@ -1,0 +1,23 @@
+# Dockerfile.simple - Ultra simple para funcionar rápido
+FROM node:18-alpine AS builder
+
+WORKDIR /app
+COPY Web/ ./
+RUN npm ci && npm run build -- --configuration docker-prod
+
+FROM golang:1.23-alpine
+WORKDIR /app
+
+# Copiar archivos go
+COPY Api/go.mod Api/go.sum ./
+RUN go mod download
+COPY Api/main.go ./
+
+# Copiar archivos Angular compilados
+COPY --from=builder /app/dist/ ./portaldelabogado/
+
+# Build go
+RUN go build -o app main.go
+
+EXPOSE 8080
+CMD ["./app"]

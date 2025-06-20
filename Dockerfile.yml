@@ -1,0 +1,92 @@
+# Dockerfile para Portal de Abogados SPA
+# Multi-stage build: Angular + Golang
+
+# ===========================
+# Stage 1: Build Angular App
+# ===========================
+FROM node:18-alpine AS angular-builder
+
+# Configurar directorio de trabajo
+WORKDIR /app
+
+# Copiar solo archivos de configuración primero (para cache de Docker)
+COPY Web/package*.json ./
+
+# Instalar dependencias EN EL CONTAINER (no copiar node_modules)
+RUN npm ci --production=false
+
+# Copiar código fuente (pero NO node_modules)
+COPY Web/src ./src
+COPY Web/public ./public
+COPY Web/angular.json ./
+COPY Web/tsconfig*.json ./
+COPY Web/proxy.conf*.json ./
+
+# Build de producción para Docker
+RUN npm run build -- --configuration docker-prod
+
+# ===========================
+# Stage 2: Build Golang App
+# ===========================
+FROM golang:1.23-alpine AS go-builder
+
+# Instalar dependencias del sistema
+RUN apk add --no-cache git ca-certificates
+
+# Configurar directorio de trabajo
+WORKDIR /app
+
+# Copiar archivos de Go
+COPY Api/go.mod Api/go.sum ./
+RUN go mod download
+
+# Copiar código fuente de Go
+COPY Api/main.go ./
+
+# Copiar archivos estáticos de Angular desde stage anterior
+COPY --from=angular-builder /app/dist/browser/ ./portaldelabogado/
+
+# Build del ejecutable Go
+RUN CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo -o portal-abogados-spa .
+
+# ===========================
+# Stage 3: Runtime Image
+# ===========================
+FROM alpine:latest
+
+# Instalar certificados CA para HTTPS
+RUN apk --no-cache add ca-certificates tzdata wget
+
+# Crear usuario no-root para seguridad
+RUN addgroup -g 1001 appgroup && \
+    adduser -u 1001 -G appgroup -s /bin/sh -D appuser
+
+# Configurar directorio de trabajo
+WORKDIR /app
+
+# Copiar ejecutable desde builder
+COPY --from=go-builder /app/portal-abogados-spa .
+
+# Copiar archivos estáticos desde builder
+COPY --from=go-builder /app/portaldelabogado/ ./portaldelabogado/
+
+# Cambiar propietario de archivos
+RUN chown -R appuser:appgroup /app
+
+# Cambiar a usuario no-root
+USER appuser
+
+# Exponer puerto
+EXPOSE 8080
+
+# Variables de entorno por defecto
+ENV PORT=8080
+ENV MODE=production
+ENV STATIC_DIR=./portaldelabogado
+
+# Health check
+HEALTHCHECK --interval=30s --timeout=3s --start-period=5s --retries=3 \
+    CMD wget --no-verbose --tries=1 --spider http://localhost:8080/api/health || exit 1
+
+# Comando para ejecutar la aplicación
+CMD ["./portal-abogados-spa"]

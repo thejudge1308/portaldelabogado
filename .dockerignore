@@ -1,0 +1,99 @@
+# .dockerignore - Archivos a excluir del contexto Docker
+
+# ===========================
+# Node.js / Angular
+# ===========================
+Web/node_modules/
+Web/dist/
+Web/.angular/
+Web/tmp/
+Web/coverage/
+**/.npm
+**/.node_repl_history
+**/.node_modules
+
+# ===========================
+# Golang 
+# ===========================
+Api/portal-abogados-spa
+Api/*.exe
+Api/debug
+**/*.exe
+**/*.dll
+**/*.so
+**/*.dylib
+
+# ===========================
+# Build artifacts
+# ===========================
+**/dist/
+**/build/
+**/target/
+**/.next/
+**/.nuxt/
+
+# ===========================
+# Environment y secrets
+# ===========================
+**/.env
+**/.env.local
+**/.env.development
+**/.env.test
+**/.env.production
+**/.env.*.local
+
+# ===========================
+# Version control
+# ===========================
+**/.git/
+**/.gitignore
+**/.gitattributes
+
+# ===========================
+# IDEs
+# ===========================
+**/.vscode/
+**/.idea/
+**/*.swp
+**/*.swo
+**/*~
+
+# ===========================
+# OS generated files
+# ===========================
+**/.DS_Store
+**/Thumbs.db
+**/*.log
+
+# ===========================
+# Docker
+# ===========================
+**/Dockerfile*
+**/docker-compose*
+**/.dockerignore
+
+# ===========================
+# Documentation y scripts
+# ===========================
+**/README.md
+**/CHANGELOG.md
+**/LICENSE
+**/*.md
+**/docs/
+**/scripts/
+**/*.sh
+
+# ===========================
+# Testing
+# ===========================
+**/coverage/
+**/.nyc_output/
+**/test-results/
+**/e2e/
+
+# ===========================
+# Backups
+# ===========================
+**/*.backup
+**/*.bak
+**/*.tmp

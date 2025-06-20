@@ -17,7 +17,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:application",
           "options": {
-            "outputPath": "dist/web",
+            "outputPath": "dist",
             "index": "src/index.html",
             "browser": "src/main.ts",
             "polyfills": ["zone.js"],
@@ -41,6 +41,12 @@
           },
           "configurations": {
             "production": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.prod.ts"
+                }
+              ],
               "budgets": [
                 {
                   "type": "initial",
@@ -53,12 +59,102 @@
                   "maximumError": "8kB"
                 }
               ],
-              "outputHashing": "all"
+              "outputHashing": "all",
+              "optimization": true,
+              "sourceMap": false,
+              "extractLicenses": true,
+              "namedChunks": false
             },
             "development": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.development.ts"
+                }
+              ],
               "optimization": false,
               "extractLicenses": false,
-              "sourceMap": true
+              "sourceMap": true,
+              "namedChunks": true,
+              "outputHashing": "none"
+            },
+            "spa-dev": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.spa-dev.ts"
+                }
+              ],
+              "outputPath": "../Api/portaldelabogado",
+              "optimization": false,
+              "extractLicenses": false,
+              "sourceMap": true,
+              "namedChunks": true,
+              "outputHashing": "none",
+              "index": {
+                "input": "src/index.html",
+                "output": "index.html"
+              }
+            },
+            "spa-prod": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.spa-prod.ts"
+                }
+              ],
+              "outputPath": "../Api/portaldelabogado",
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "1MB",
+                  "maximumError": "2MB"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kB",
+                  "maximumError": "10kB"
+                }
+              ],
+              "outputHashing": "all",
+              "optimization": true,
+              "sourceMap": false,
+              "extractLicenses": true,
+              "namedChunks": false,
+              "index": {
+                "input": "src/index.html",
+                "output": "index.html"
+              }
+            },
+            "docker-prod": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.spa-prod.ts"
+                }
+              ],
+              "outputPath": "dist",
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "1MB",
+                  "maximumError": "2MB"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kB",
+                  "maximumError": "10kB"
+                }
+              ],
+              "outputHashing": "all",
+              "optimization": true,
+              "sourceMap": false,
+              "extractLicenses": true,
+              "namedChunks": false,
+              "index": {
+                "input": "src/index.html",
+                "output": "index.html"
+              }
             }
           },
           "defaultConfiguration": "production"
@@ -67,7 +163,8 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
             "host": "0.0.0.0",
-            "port": 4200
+            "port": 4200,
+            "proxyConfig": "proxy.conf.json"
           },
           "configurations": {
             "production": {
@@ -75,6 +172,13 @@
             },
             "development": {
               "buildTarget": "Web:build:development"
+            },
+            "spa-dev": {
+              "buildTarget": "Web:build:spa-dev",
+              "proxyConfig": "proxy.conf.spa.json"
+            },
+            "spa-prod": {
+              "buildTarget": "Web:build:spa-prod"
             }
           },
           "defaultConfiguration": "development"
