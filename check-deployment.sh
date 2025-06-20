@@ -53,8 +53,8 @@ fi
 
 # Verificar Docker Compose
 echo -e "\n${YELLOW}🛠️  Verificando Docker Compose...${NC}"
-if command -v docker-compose &> /dev/null; then
-    COMPOSE_VERSION=$(docker-compose --version | cut -d' ' -f3 | cut -d',' -f1)
+if command -v docker compose &> /dev/null; then
+    COMPOSE_VERSION=$(docker compose --version | cut -d' ' -f3 | cut -d',' -f1)
     report_success "Docker Compose $COMPOSE_VERSION instalado"
 elif docker compose version &> /dev/null; then
     COMPOSE_VERSION=$(docker compose version --short)
@@ -69,7 +69,7 @@ echo -e "\n${YELLOW}📁 Verificando estructura del proyecto...${NC}"
 # Verificar archivos esenciales
 REQUIRED_FILES=(
     "Dockerfile"
-    "docker-compose.yml"
+    "docker compose.yml"
     "Web/package.json"
     "Web/angular.json"
     "Api/go.mod"

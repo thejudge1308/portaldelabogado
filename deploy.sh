@@ -29,7 +29,7 @@ if ! command -v docker &> /dev/null; then
 fi
 
 # Verificar que Docker Compose está disponible
-if ! command -v docker-compose &> /dev/null; then
+if ! command -v docker compose &> /dev/null; then
     echo -e "${RED}❌ Docker Compose no está instalado. Por favor instala Docker Compose primero.${NC}"
     exit 1
 fi
@@ -66,7 +66,7 @@ build_images() {
     echo -e "${YELLOW}🔨 Construyendo imágenes Docker...${NC}"
     
     # Limpiar builds anteriores
-    docker-compose -f $COMPOSE_FILE build --no-cache portal-app
+    docker compose -f $COMPOSE_FILE build --no-cache portal-app
     
     echo -e "${GREEN}✅ Imágenes construidas exitosamente${NC}"
 }
@@ -101,8 +101,8 @@ deploy() {
         PROFILES="$PROFILES traefik"
     fi
     
-    # Construir comando de docker-compose
-    COMPOSE_CMD="docker-compose -f $COMPOSE_FILE"
+    # Construir comando de docker compose
+    COMPOSE_CMD="docker compose -f $COMPOSE_FILE"
     if [ ! -z "$PROFILES" ]; then
         for profile in $PROFILES; do
             COMPOSE_CMD="$COMPOSE_CMD --profile $profile"
@@ -152,7 +152,7 @@ check_health() {
 # Función para ver logs
 show_logs() {
     echo -e "${YELLOW}📋 Mostrando logs de los servicios...${NC}"
-    docker-compose -f $COMPOSE_FILE logs -f --tail=50
+    docker compose -f $COMPOSE_FILE logs -f --tail=50
 }
 
 # Función para limpiar
@@ -167,7 +167,7 @@ cleanup() {
 backup_db() {
     echo -e "${YELLOW}💾 Creando backup de la base de datos...${NC}"
     BACKUP_FILE="backup_$(date +%Y%m%d_%H%M%S).sql"
-    docker-compose -f $COMPOSE_FILE exec postgres pg_dump -U portal_user portaldeabogados > $BACKUP_FILE
+    docker compose -f $COMPOSE_FILE exec postgres pg_dump -U portal_user portaldeabogados > $BACKUP_FILE
     echo -e "${GREEN}✅ Backup creado: $BACKUP_FILE${NC}"
 }
 
@@ -179,7 +179,7 @@ restore_db() {
     fi
     
     echo -e "${YELLOW}🔄 Restaurando backup: $1${NC}"
-    docker-compose -f $COMPOSE_FILE exec -T postgres psql -U portal_user portaldeabogados < $1
+    docker compose -f $COMPOSE_FILE exec -T postgres psql -U portal_user portaldeabogados < $1
     echo -e "${GREEN}✅ Backup restaurado exitosamente${NC}"
 }
 
@@ -194,29 +194,29 @@ case "$1" in
         ;;
     start)
         echo -e "${YELLOW}▶️  Iniciando servicios...${NC}"
-        docker-compose -f $COMPOSE_FILE start
+        docker compose -f $COMPOSE_FILE start
         ;;
     stop)
         echo -e "${YELLOW}⏹️  Deteniendo servicios...${NC}"
-        docker-compose -f $COMPOSE_FILE stop
+        docker compose -f $COMPOSE_FILE stop
         ;;
     restart)
         echo -e "${YELLOW}🔄 Reiniciando servicios...${NC}"
-        docker-compose -f $COMPOSE_FILE restart
+        docker compose -f $COMPOSE_FILE restart
         ;;
     logs)
         show_logs
         ;;
     status)
         echo -e "${YELLOW}📊 Estado de los servicios:${NC}"
-        docker-compose -f $COMPOSE_FILE ps
+        docker compose -f $COMPOSE_FILE ps
         ;;
     cleanup)
         cleanup
         ;;
     ssl)
         echo -e "${YELLOW}🔒 Configurando SSL con Traefik...${NC}"
-        docker-compose -f $COMPOSE_FILE --profile traefik up -d traefik
+        docker compose -f $COMPOSE_FILE --profile traefik up -d traefik
         ;;
     backup)
         backup_db
