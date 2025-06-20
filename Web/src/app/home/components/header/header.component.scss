@@ -162,5 +162,10 @@
       background-color: var(--primary-lighter);
       color: var(--primary-color);
     }
+
+    &.active {
+      color: var(--primary-color);
+      font-weight: 600;
+    }
   }
 }

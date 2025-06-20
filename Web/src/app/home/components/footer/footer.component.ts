@@ -49,13 +49,14 @@ export class FooterComponent {
 
   quickLinks: FooterLink[] = [
     { label: 'Inicio', route: '/' },
-    { label: 'Buscar Abogados', route: '/abogados' },
-    { label: 'Consulta Gratis', route: '/consulta' },
-    { label: 'Blog Legal', route: '/blog' },
-    { label: 'Sobre Nosotros', route: '/nosotros' },
+    { label: 'Servicios', route: '/servicios' },
+    //{ label: 'Buscar Abogados', route: '/abogados' },
+    //{ label: 'Consulta Gratis', route: '/consulta' },
+    //{ label: 'Blog Legal', route: '/blog' },
+    //{ label: 'Sobre Nosotros', route: '/nosotros' },
     { label: 'Contacto', route: '/contacto' },
-    { label: 'Preguntas Frecuentes', route: '/faq' },
-    { label: 'Testimonios', route: '/testimonios' },
+    //{ label: 'Preguntas Frecuentes', route: '/faq' },
+    //{ label: 'Testimonios', route: '/testimonios' },
   ];
 
   legalServices: FooterLink[] = [

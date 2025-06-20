@@ -25,9 +25,9 @@
       <a class="nav-link" routerLink="/servicios" routerLinkActive="active">
         Servicios
       </a>
-      <a class="nav-link" routerLink="/nosotros" routerLinkActive="active">
+      <!--<a class="nav-link" routerLink="/nosotros" routerLinkActive="active">
         Sobre Nosotros
-      </a>
+      </a>-->
       <a class="nav-link" routerLink="/contacto" routerLinkActive="active">
         Contacto
       </a>
@@ -86,14 +86,14 @@
       <mat-icon>gavel</mat-icon>
       Servicios
     </a>
-    <a
+    <!--<a
       class="mobile-menu-item"
       routerLink="/nosotros"
       routerLinkActive="active"
     >
       <mat-icon>info</mat-icon>
       Sobre Nosotros
-    </a>
+    </a>-->
     <a
       class="mobile-menu-item"
       routerLink="/contacto"
@@ -102,7 +102,11 @@
       <mat-icon>contact_mail</mat-icon>
       Contacto
     </a>
-    <button class="btn-primary mobile-menu-item" routerLink="/consulta">
+    <button
+      class="btn-primary mobile-menu-item"
+      routerLink="/consulta"
+      [style]="{ color: 'white' }"
+    >
       <mat-icon>person</mat-icon>
       Soy Abogado
     </button>
