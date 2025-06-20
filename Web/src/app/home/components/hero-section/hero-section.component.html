@@ -70,6 +70,11 @@
                 <mat-option value="migratorio">Derecho Migratorio</mat-option>
               </mat-select>
               <mat-icon matSuffix>gavel</mat-icon>
+              <mat-error
+                *ngIf="searchForm.get('specialty')?.hasError('required')"
+              >
+                Selecciona una especialidad legal
+              </mat-error>
             </mat-form-field>
 
             <mat-form-field appearance="outline" class="form-field">
@@ -92,6 +97,56 @@
                 <mat-option value="coquimbo">Región de Coquimbo</mat-option>
               </mat-select>
               <mat-icon matSuffix>location_on</mat-icon>
+              <mat-error
+                *ngIf="searchForm.get('location')?.hasError('required')"
+              >
+                Selecciona una ubicación
+              </mat-error>
+            </mat-form-field>
+          </div>
+
+          <div class="form-row">
+            <mat-form-field appearance="outline" class="form-field full-width">
+              <mat-label>Nombre</mat-label>
+              <input
+                matInput
+                formControlName="name"
+                placeholder="Ej: Juan Pérez"
+              />
+              <mat-icon matSuffix>person</mat-icon>
+            </mat-form-field>
+            <mat-form-field appearance="outline" class="form-field full-width">
+              <mat-label>Teléfono</mat-label>
+              <input
+                matInput
+                formControlName="phone"
+                placeholder="Ej: +56 9 1234 5678"
+              />
+              <mat-icon matSuffix>phone</mat-icon>
+              <mat-error *ngIf="searchForm.get('phone')?.hasError('required')">
+                El teléfono es requerido
+              </mat-error>
+              <mat-error *ngIf="searchForm.get('phone')?.hasError('pattern')">
+                Ingresa un número de teléfono válido
+              </mat-error>
+            </mat-form-field>
+          </div>
+
+          <div class="form-row">
+            <mat-form-field appearance="outline" class="form-field full-width">
+              <mat-label>Correo</mat-label>
+              <input
+                matInput
+                formControlName="email"
+                placeholder="Ej: ej@ej.com"
+              />
+              <mat-icon matSuffix>email</mat-icon>
+              <mat-error *ngIf="searchForm.get('email')?.hasError('required')">
+                El correo es requerido
+              </mat-error>
+              <mat-error *ngIf="searchForm.get('email')?.hasError('email')">
+                Ingresa un correo electrónico válido
+              </mat-error>
             </mat-form-field>
           </div>
 
@@ -102,7 +157,7 @@
                 matInput
                 formControlName="description"
                 placeholder="Ej: Necesito ayuda con un divorcio de mutuo acuerdo..."
-                rows="3"
+                rows="2"
               ></textarea>
               <mat-icon matSuffix>description</mat-icon>
             </mat-form-field>
@@ -115,7 +170,7 @@
       </mat-card-content>
 
       <mat-card-actions class="search-actions">
-        <button class="btn-primary search-button">
+        <button class="btn-primary search-button" (click)="submitSearch()">
           <mat-icon>search</mat-icon>
           Necesito un abogado
         </button>

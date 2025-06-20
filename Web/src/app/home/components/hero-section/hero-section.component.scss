@@ -42,7 +42,7 @@
   gap: var(--spacing-2xl);
   align-items: center;
   z-index: 1;
-
+  padding-bottom: 0.5rem;
   @media (max-width: 968px) {
     grid-template-columns: 1fr;
     gap: var(--spacing-xl);

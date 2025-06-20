@@ -1,7 +1,12 @@
 // hero-section.component.ts
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ReactiveFormsModule, FormBuilder, FormGroup } from '@angular/forms';
+import {
+  ReactiveFormsModule,
+  FormBuilder,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -32,13 +37,22 @@ export class HeroSectionComponent {
 
   constructor(private fb: FormBuilder) {
     this.searchForm = this.fb.group({
-      specialty: [''],
-      location: [''],
+      specialty: ['', Validators.required],
+      location: ['', Validators.required],
+      name: ['', [Validators.required]],
+      email: ['', [Validators.required, Validators.email]],
+      phone: ['', [Validators.pattern(/^\+?[0-9\s]+$/)]],
       description: [''],
     });
   }
 
-  onSearch() {
-    // Funcionalidad deshabilitada hasta el lanzamiento
+  submitSearch() {
+    if (this.searchForm.valid) {
+      const searchData = this.searchForm.value;
+      console.log('Search Data:', searchData);
+      // Aquí puedes manejar la lógica de búsqueda, como redirigir a una página de resultados
+    } else {
+      console.error('Formulario inválido', this.searchForm.errors);
+    }
   }
 }
