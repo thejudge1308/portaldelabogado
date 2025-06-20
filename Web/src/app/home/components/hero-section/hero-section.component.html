@@ -114,6 +114,9 @@
                 placeholder="Ej: Juan Pérez"
               />
               <mat-icon matSuffix>person</mat-icon>
+              <mat-error *ngIf="searchForm.get('name')?.hasError('required')">
+                El nombre es requerido
+              </mat-error>
             </mat-form-field>
             <mat-form-field appearance="outline" class="form-field full-width">
               <mat-label>Teléfono</mat-label>

@@ -50,9 +50,20 @@ export class HeroSectionComponent {
     if (this.searchForm.valid) {
       const searchData = this.searchForm.value;
       console.log('Search Data:', searchData);
-      // Aquí puedes manejar la lógica de búsqueda, como redirigir a una página de resultados
+      // Aquí puedes manejar la lógica de búsqueda
     } else {
-      console.error('Formulario inválido', this.searchForm.errors);
+      // Marcar todos los campos como tocados para mostrar errores
+      this.searchForm.markAllAsTouched();
+
+      // Opcional: Scroll al primer campo con error
+      const firstErrorField = document.querySelector('.mat-form-field-invalid');
+      if (firstErrorField) {
+        firstErrorField.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }
+
+      console.error(
+        'Formulario inválido. Por favor, revisa los campos marcados.'
+      );
     }
   }
 }
