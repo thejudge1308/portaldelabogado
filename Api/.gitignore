@@ -1,0 +1,51 @@
+# Binarios
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+portal-api
+main
+
+# Test binary, construido con `go test -c`
+*.test
+
+# Output del profiler
+*.out
+
+# Dependency directories (remove the comment below to include it)
+vendor/
+
+# Go workspace file
+go.work
+
+# Variables de entorno
+.env
+
+# Logs
+*.log
+
+# Archivos temporales del editor
+*~
+.*.swp
+.*.swo
+
+# IDEs
+.vscode/
+.idea/
+*.iml
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Air (herramienta de recarga automática)
+tmp/
+
+#wwwroot
+/wwwroot/
