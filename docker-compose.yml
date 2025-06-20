@@ -33,7 +33,7 @@ services:
       start_period: 40s
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.portal.rule=Host(`portaldelabogado.com`)"
+      - "traefik.http.routers.portal.rule=Host(`portaldelabogado.com`) || Host(`www.portaldelabogado.com`)"
       - "traefik.http.services.portal.loadbalancer.server.port=8080"
       - "traefik.http.routers.portal.tls=true"
       - "traefik.http.routers.portal.tls.certresolver=letsencrypt"
