@@ -1,0 +1,143 @@
+version: "3.8"
+
+services:
+  # ====================
+  # Portal de Abogados - Aplicación Principal
+  # ====================
+  portal-app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: portal-abogados-app
+    restart: unless-stopped
+    ports:
+      - "8080:8080"
+    environment:
+      - PORT=8080
+      - GIN_MODE=release
+    networks:
+      - portal-network
+    healthcheck:
+      test:
+        [
+          "CMD",
+          "wget",
+          "--no-verbose",
+          "--tries=1",
+          "--spider",
+          "http://localhost:8080/api/health",
+        ]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.portal.rule=Host(`portaldelabogado.com`)"
+      - "traefik.http.services.portal.loadbalancer.server.port=8080"
+      - "traefik.http.routers.portal.tls=true"
+      - "traefik.http.routers.portal.tls.certresolver=letsencrypt"
+
+  # ====================
+  # Nginx Reverse Proxy (Opcional)
+  # ====================
+  nginx:
+    image: nginx:alpine
+    container_name: portal-nginx
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./ssl:/etc/nginx/ssl:ro
+    depends_on:
+      - portal-app
+    networks:
+      - portal-network
+    profiles:
+      - nginx
+
+  # ====================
+  # PostgreSQL Database (Para futuras funcionalidades)
+  # ====================
+  postgres:
+    image: postgres:15-alpine
+    container_name: portal-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: portaldeabogados
+      POSTGRES_USER: ${DB_USER:-portal_user}
+      POSTGRES_PASSWORD: ${DB_PASSWORD:-changeme}
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./db-init:/docker-entrypoint-initdb.d
+    ports:
+      - "5432:5432"
+    networks:
+      - portal-network
+    profiles:
+      - database
+
+  # ====================
+  # Redis Cache (Para futuras funcionalidades)
+  # ====================
+  redis:
+    image: redis:7-alpine
+    container_name: portal-redis
+    restart: unless-stopped
+    command: redis-server --appendonly yes
+    volumes:
+      - redis_data:/data
+    ports:
+      - "6379:6379"
+    networks:
+      - portal-network
+    profiles:
+      - cache
+
+  # ====================
+  # Traefik Reverse Proxy con SSL automático
+  # ====================
+  traefik:
+    image: traefik:v3.0
+    container_name: portal-traefik
+    restart: unless-stopped
+    command:
+      - "--api.dashboard=true"
+      - "--providers.docker=true"
+      - "--providers.docker.exposedbydefault=false"
+      - "--entrypoints.web.address=:80"
+      - "--entrypoints.websecure.address=:443"
+      - "--certificatesresolvers.letsencrypt.acme.tlschallenge=true"
+      - "--certificatesresolvers.letsencrypt.acme.email=tu-email@example.com"
+      - "--certificatesresolvers.letsencrypt.acme.storage=/letsencrypt/acme.json"
+    ports:
+      - "80:80"
+      - "443:443"
+      - "8090:8080" # Dashboard de Traefik
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - traefik_letsencrypt:/letsencrypt
+    networks:
+      - portal-network
+    profiles:
+      - traefik
+
+# ====================
+# Networks
+# ====================
+networks:
+  portal-network:
+    driver: bridge
+
+# ====================
+# Volumes
+# ====================
+volumes:
+  postgres_data:
+    driver: local
+  redis_data:
+    driver: local
+  traefik_letsencrypt:
+    driver: local
